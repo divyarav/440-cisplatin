@@ -1,2 +1,1 @@
-# 440-cisplatin
-Identifying novel pathways involved in resistance to cisplatin
+### 440-cisplatin: Identifying novel pathways involved in resistance to cisplatin
