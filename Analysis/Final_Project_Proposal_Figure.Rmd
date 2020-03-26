@@ -1,0 +1,123 @@
+---
+title: "Final_Project_Proposal_Figure"
+author: "Divya Ravinder"
+date: "3/25/2020"
+output: html_document
+---
+
+```{r}
+#Read data
+all_data = read.table('A2780_6hr_R2_featureCount.out')
+
+#Isolate gene names and transcript counts for each condition
+transcript_counts = subset(x = all_data, select = c(V1,V7,V8))
+
+#Convert all transcript counts from factor to numeric type
+transcript_counts$V7 = as.numeric(as.character(transcript_counts$V7))
+transcript_counts$V8 = as.numeric(as.character(transcript_counts$V8))
+
+#Replace all zeros with ones
+for (i in 2:dim(transcript_counts)[1]) {
+  if (transcript_counts$V7[i] == 0) {
+    transcript_counts$V7[i] = 1
+  }
+  if (transcript_counts$V8[i] == 0) {
+    transcript_counts$V8[i] = 1
+  }
+}
+
+sensitive = transcript_counts$V7
+resistant = transcript_counts$V8
+
+percent_diff = (resistant-sensitive)/sensitive
+
+#Add percent difference to data frame
+transcript_counts$V9 <- percent_diff
+
+names(transcript_counts)[1] <- "Gene"
+names(transcript_counts)[2] <- "Sensitive"
+names(transcript_counts)[3] <- "Resistant"
+names(transcript_counts)[4] <- "Percentage Difference"
+
+#Remove first row of df
+transcript_counts <- transcript_counts[-c(1),]
+
+#Normalize transcript counts for each gene 
+normalized_transcript_counts <- transcript_counts
+
+for (i in 1:dim(normalized_transcript_counts)[1]) {
+  sum_of_counts = normalized_transcript_counts$Sensitive[i] + 
+    normalized_transcript_counts$Resistant[i]
+  normalized_transcript_counts$Sensitive[i] <- normalized_transcript_counts$Sensitive[i]/sum_of_counts
+  normalized_transcript_counts$Resistant[i] <- normalized_transcript_counts$Resistant[i]/sum_of_counts
+}
+
+
+```
+
+
+```{r}
+#GENERATE HEATMAP WITH COUNTS FOR EACH CONDITION
+
+most_diff_transcript_counts = subset(x = transcript_counts, 
+                                     subset = abs(transcript_counts$`Percentage Difference`) > 300)
+
+library(ggplot2)
+
+# Build dataframes for each condition
+sensitive_df = data.frame(Genes = most_diff_transcript_counts$Gene, 
+                        Transcript_Count = most_diff_transcript_counts$Sensitive, Condition = "Cisplatin-Sensitive")
+resistant_df = data.frame(Genes = most_diff_transcript_counts$Gene, 
+                        Transcript_Count = most_diff_transcript_counts$Resistant, Condition = "Cisplatin-Resistant")
+
+final_df <- rbind(sensitive_df, resistant_df)
+
+final_df <- reshape2:::melt.data.frame(final_df) 
+
+# pdf(file = './Proposal_figure.pdf', width = 8, height = 8)
+
+ggplot(data = final_df, aes(Condition, Genes, fill = value)) +
+  geom_tile(show.legend = TRUE) + 
+  theme_minimal() +
+  scale_fill_gradient(name = '# of Transcripts', low = '#DCEBF5', high = "#16618E", trans = 'log') + 
+  ggtitle('Effect of Cisplatin Resistance on Gene Expression') + 
+  theme(title = element_text(face = "bold", size = 13)) + 
+  theme(axis.text.y = element_text(size = 15, face = "bold")) + 
+  theme(axis.text.x = element_text(size = 13, face = "bold")) + 
+  theme(axis.title.x = element_text(size = 13, face = "bold")) +
+  theme(axis.title.y = element_text(size = 13, face = "bold")) +
+  theme(legend.text = element_text(size = 12)) + 
+  theme(plot.title = element_text(hjust = 0.5))
+
+# dev.off()
+```
+
+
+```{r}
+#GENERATE HEATMAP WITH % DIFFERENCE BETWEEN CONDITIONS
+
+#Narrow down dataset to only include genes with largest differences in expression between conditions
+
+most_diff_transcript_counts = subset(x = normalized_transcript_counts, 
+                      subset = abs(normalized_transcript_counts$`Percentage Difference`) > 300)
+
+library(ggplot2)
+
+# Build dataframes for each condition
+final_df = data.frame(Genes = most_diff_transcript_counts$Gene, 
+                        Percentage_Difference = most_diff_transcript_counts$`Percentage Difference`)
+
+final_df <- reshape2:::melt.data.frame(final_df) 
+
+ggplot(data = final_df, aes(variable, Genes, fill = value)) +
+  geom_tile(show.legend = TRUE) + 
+  theme_minimal() +
+  scale_fill_gradient(name = 'Fold Difference', low = '#DCEBF5', high = "#16618E") + 
+  xlab('') + ggtitle('Difference in Gene Expression between 
+                     \nCisplatin-Sensitive and Cisplatin-Resistant Cells') + 
+  theme(axis.text.y = element_text(size = 10, face = "bold")) + 
+  theme(title = element_text(family = 'Arial', face = 'bold')) + 
+  theme(legend.text = element_text(size = 10)) + 
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
