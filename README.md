@@ -13,7 +13,7 @@ To reproduce the analyses performed in this project, you'll need to install the 
 
 Download [STAR: Genetics version 2.6.1](http://star.mit.edu/genetics/download/index.html). You will use this to align the raw reads to the reference sequence. 
 
-Install [fastq-dump](https://github.com/ncbi/sra-tools/wiki/HowTo:-Binary-Installation) and follow [these instructions](https://github.com/ncbi/sra-tools/wiki/HowTo:-Binary-Installation) to set up fastq-dump. You will use this to get the FASTQ files. 
+Install [fastq-dump](https://github.com/ncbi/sra-tools/wiki/HowTo:-Binary-Installation). You will use this to get the FASTQ files. 
 
 Install [Trimmomatic version 0.36](https://kbase.us/applist/apps/kb_trimmomatic/run_trimmomatic/release). You will use this to trim the adapters off the reads.
 
