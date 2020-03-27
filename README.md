@@ -11,12 +11,18 @@ _Schott S, Wimberger P, Klink B, et al. The conjugated antimetabolite 5-FdU-ECyd
 ## Installing
 To reproduce the analyses performed in this project, you'll need to install the required tools. 
 
-Download [STAR: Genetics](http://star.mit.edu/genetics/download/index.html). You will use this to process the raw RNA-seq data and obtain transcript counts for each condition.
+Download [STAR: Genetics version 2.6.1](http://star.mit.edu/genetics/download/index.html). You will use this to align the raw reads to the reference sequence. 
+
+Install [fastq-dump](https://github.com/ncbi/sra-tools/wiki/HowTo:-Binary-Installation) and follow [these instructions](https://github.com/ncbi/sra-tools/wiki/HowTo:-Binary-Installation) to set up fastq-dump. You will use this to get the FASTQ files. 
+
+Install [Trimmomatic version 0.36](https://kbase.us/applist/apps/kb_trimmomatic/run_trimmomatic/release). You will use this to trim the adapters off the reads.
+
+Install [featurecounts](https://bio.tools/featurecounts). You will use this to count the transcripts for each gene for each cell type. 
 
 Download [R version 3.4.1 (or latest version)](https://www.r-project.org) to reproduce the analyses.
 
 ## Reproducing Analyses
-After downloading the RNA-seq data from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM2589608), you will need to align the reads within a FASTQ file to a reference sequence. To do this, run `root.sh`. This will allow you to obtain transcript counts for each gene for both the cisplatin-sensitive cell line and the cisplatin-resistant cell line. 
+After downloading the RNA-seq data from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM2589608), you will need to align the reads within a FASTQ file to a reference sequence, trim adapters off the reads, and count transcripts for each gene. To do this, run `root.sh`. This will allow you to obtain transcript counts for each gene for both the cisplatin-sensitive cell line and the cisplatin-resistant cell line. 
 
 Open `A2780_6hr_R2_featureCount.out` for the transcript counts we obtained. If you open this data using R, the first column of the data frame is the list of genes for which transcripts were obtained. The seventh column contains the transcript counts for the cisplatin-sensitive cell line and the eighth column contains the transcript counts for the cisplatin-resistant cell line. 
 
