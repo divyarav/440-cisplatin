@@ -17,6 +17,10 @@ Download R version 3.4.1 (or latest version) at [https://www.r-project.org](http
 ## Reproducing Analyses
 After downloading the RNA-seq data from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM2589608), you will need to align the reads within a FASTQ file to a reference sequence. To do this, run `root.sh`. This will allow you to obtain transcript counts for each gene for both the cisplatin-sensitive cell line and the cisplatin-resistant cell line. 
 
+Open `A2780_6hr_R2_featureCount.out` for the transcript counts we obtained. If you open this data using R, the first column of the data frame is the list of genes for which transcripts were obtained. The seventh column contains the transcript counts for the cisplatin-sensitive cell line and the eighth column contains the transcript counts for the cisplatin-resistant cell line. 
+
+To reproduce the first figure we created, the heatmap showing the transcript counts for the 21 genes with the largest differences in expression between the two cell lines, run `Final_Project_Proposal_Figure.Rmd`. This code is broken into three chunks. Run the first chunk to open the data file, isolate the useful data (just the genes and transcript counts), and calculate the percentage difference in expression for each gene. The percentage difference will then be used to filter the data to only show the genes with the largest differences in expression between the two cell lines. 
+
 # Directory Structure
 
 ### Data
