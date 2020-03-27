@@ -4,7 +4,7 @@ This repo contains the code to reproduce all of the analyses in "Identifying nov
 
 The raw RNA-seq data is available on [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM2589608). All of the raw sequencing files are on SRA (Sequence Read Archive). This data was obtained from "The conjugated antimetabolite 5-FdU-ECyd and its cellular and molecular effects on platinum-sensitive vs. -resistant ovarian cancer cells in vitro", Schott et al. 2017.
 
-Schott S, Wimberger P, Klink B, et al. The conjugated antimetabolite 5-FdU-ECyd and its cellular and molecular effects on platinum-sensitive vs. -resistant ovarian cancer cells in vitro. Oncotarget. 2017;8(44). doi:10.18632/oncotarget.20260.
+[Schott S, Wimberger P, Klink B, et al. The conjugated antimetabolite 5-FdU-ECyd and its cellular and molecular effects on platinum-sensitive vs. -resistant ovarian cancer cells in vitro. Oncotarget. 2017;8(44). doi:10.18632/oncotarget.20260.]
 
 # Reproducing Analyses
 
