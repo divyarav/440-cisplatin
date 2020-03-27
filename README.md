@@ -28,6 +28,7 @@ The third chunk of code works fairly similarly to the second chunk except that i
 All data-related files are in the `Data/` folder:
 
 `root.sh` - script for collecting raw data from GEO and aligning reads
+
 `A2780_6hr_R2_featureCount.out` - processed RNA-seq data (transcript counts after alignment of the reads)
 
 ### Analysis
