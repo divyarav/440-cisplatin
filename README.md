@@ -19,7 +19,7 @@ After downloading the RNA-seq data from [GEO](https://www.ncbi.nlm.nih.gov/geo/q
 
 Open `A2780_6hr_R2_featureCount.out` for the transcript counts we obtained. If you open this data using R, the first column of the data frame is the list of genes for which transcripts were obtained. The seventh column contains the transcript counts for the cisplatin-sensitive cell line and the eighth column contains the transcript counts for the cisplatin-resistant cell line. 
 
-To reproduce the first figure we created, the heatmap showing the transcript counts for the 21 genes with the largest differences in expression between the two cell lines, run `Final_Project_Proposal_Figure.Rmd`. This code is broken into three chunks. Run the first chunk to open the data file, isolate the useful data (just the genes and transcript counts), and calculate the percentage difference in expression for each gene. The percentage difference will then be used to filter the data to only show the genes with the largest differences in expression between the two cell lines. In the second chunk of code, you can change the percentage difference threshold on the data filter to determine how many genes will be visible on the heatmap. Then, you can simply run the second chunk of code and it should produce the heatmap. 
+To reproduce the first figure we created, the heatmap showing the transcript counts for the 21 genes with the largest differences in expression between the two cell lines, run `Transcript_count_heatmap.Rmd`. This code is broken into three chunks. Run the first chunk to open the data file, isolate the useful data (just the genes and transcript counts), and calculate the percentage difference in expression for each gene. The percentage difference will then be used to filter the data to only show the genes with the largest differences in expression between the two cell lines. In the second chunk of code, you can change the percentage difference threshold on the data filter to determine how many genes will be visible on the heatmap. Then, you can simply run the second chunk of code and it should produce the heatmap. 
 
 The third chunk of code works fairly similarly to the second chunk except that it produces a heatmap showing the fold difference between the number of transcripts for the two cell types in a heat map. We decided not to use this figure in our project for now, but left the code in case we decide to use it later. You do not need to run this chunk of code to reproduce our analyses. 
 
@@ -34,7 +34,9 @@ All data-related files are in the `data/` folder:
 ### Analysis
 All code for conducting data analyses are in the `analysis/` folder:
 
-`Final_Project_Proposal_Figure.Rmd` - code used to generate heatmap showing the transcript counts for the 21 genes with the largest differences in expression between the two cell lines
+`Transcript_count_heatmap.Rmd` - code used to generate heatmap showing the transcript counts for the 21 genes with the largest differences in expression between the two cell lines
 
 ### Figures
+All figures are in the `Figures/` folder:
 
+`Transcript_count_heatmap.pdf` - pdf of heatmap showing the transcript counts for the 21 genes with the largest differences in expression between the two cell lines
